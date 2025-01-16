@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attire Home</title>
+
+    <!-- bootstrap css link  -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <!-- bootstrap link  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+    <!-- fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+    <div class="body">
+        <!-- Loader -->
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+        </div>
+        <div class="content" id="content">
+
+            <!-- navbar -->
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+                <div class="container">
+                    <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
+                        href="index.html">
+                        <img src="/PROECT_JS/image/w-logo.avif" alt="site icon" style="width: 150px;">
+
+                    </a>
+
+                    <div class="order-lg-2 nav-btns">
+                        <button type="button" class="btn position-relative">
+                            <a href="cart.html">
+                                <i class="fa fa-shopping-cart cartIcon" id="viewCart" style="color: black;"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"
+                                    id="cartCount">0</span></a>
+                        </button>
+                        <button type="button" class="btn position-relative">
+                            <i class="fa fa-heart"></i>
+
+                            <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">8</span>
+                        </button>
+                        <button type="button" class="btn position-relative">
+                            <i class="fa fa-search"></i>
+                        </button>
+
+
+                    </div>
+
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navMenu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+                        <ul class="navbar-nav mx-auto text-center">
+                            <li class="nav-item px-2 py-2">
+                                <a class="nav-link text-uppercase text-dark" href="#home">home</a>
+                            </li>
+                            <li class="nav-item dropdown px-2 py-2">
+                                <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#collection"
+                                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    collection
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#productList">men</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#productList">women</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#productList">kids</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item px-2 py-2">
+                                <a class="nav-link text-uppercase text-dark" href="#about">about up</a>
+                            </li>
+                            <li class="nav-item px-2 py-2">
+                                <a class="nav-link text-uppercase text-dark" href="#blogs">blogs</a>
+                            </li>
+                            <li class="nav-item px-2 py-2 border-0">
+                                <a class="nav-link text-uppercase text-dark" href="#popular">popular</a>
+                            </li>
+                            <li class="nav-item px-2 py-2" type="button">
+                                <a class="nav-link text-uppercase text-dark" href="login.html">Login</a>
+                            </li>
+                            <li class="nav-item px-2 py-2" type="button">
+                                <a class="nav-link text-uppercase text-dark" href="signup.html">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </nav>
+            <div id="cartContainer" class="cart-container">
+                <h2>Shopping Cart</h2>
+                <ul id="cartItems"></ul>
+                <p id="totalPrice">Total: $0</p>
+            </div>
+
+
+            <!-- end of navbar -->
+
+            <!-- header -->
+
+            <header>
+
+                <div class="slider" id="home" style="position: relative;">
+                    <div class="slide active" id="slider1"></div>
+                    <div class="slide " id="slider2"></div>
+                    <div class="slide " id="slider3"></div>
+                    <div class="slide " id="slider4"></div>
+                    <div class="slide " id="slider5"></div>
+
+                    <div class="arrow prev" onclick="slider.prev()">&#10094</div>
+                    <div class="arrow next" onclick="slider.next()">&#10095</div>
+            </header>
+
+            <!-- end of header -->
+
+            <!-- collection -->
+            <section id="collection" class="py-5">
+                <div class="container">
+                    <div class="title text-center">
+                        <h2 class="position-relative d-inline-block">New Collection</h2>
+                    </div>
+
+                    <div class="row g-0 controls">
+                        <div
+                            class="d-flex flex-wrap justify-content-center mt-3 filter-button-group filter-buttons filters">
+                            <button type="button" class="btn m-2 text-dark active-filter-btn filter" data-filter="*"
+                                onclick="filterProducts('All')">All</button>
+                            <button type="button" class="btn m-2 text-dark filter" data-filter=".best"
+                                onclick="filterProducts('best sellers')">woman</button>
+                            <button type="button" class="btn m-2 text-dark filter" data-filter=".feat"
+                                onclick="filterProducts('Featured')">Man</button>
+                            <button type="button" class="btn m-2 text-dark filter" data-filter=".new"
+                                onclick="filterProducts('New Arrival')">Kids</button>
+
+                        </div>
+                        <div class="controls mt-3 d-flex justify-content-center ">
+                            <input type="text" id="search-name" class="form-control mt-2 mb-5"
+                                placeholder="Search by name" style="margin: 0px 10px 0px 20px;margin-bottom: 10px;">
+                            <select type="text" id="sort-price" class="form-select mt-3 mb-5"
+                                style="margin-bottom: 10px;">
+                                <option value="none">Sort by price</option>
+                                <option value="asc">Low to High</option>
+                                <option value="desc">High to Low</option>
+                            </select>
+                        </div>
+
+                        <ul id="productList" class="product-list">
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- about us -->
+            <section id="about" class="py-5">
+                <div class="container">
+                    <div class="row gy-lg-5 align-items-center">
+                        <div class="col-lg-6 order-lg-1 text-center text-lg-start">
+                            <div class="title pt-3 pb-5">
+                                <h2 class="position-relative d-inline-block ms-4">About Us</h2>
+                            </div>
+                            <p class="lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis,
+                                ipsam.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem fuga blanditiis, modi
+                                exercitationem quae quam eveniet! Minus labore voluptatibus corporis recusandae
+                                accusantium velit, nemo, nobis, nulla ullam pariatur totam quos.</p>
+                        </div>
+                        <div class="col-lg-6 order-lg-0">
+                            <img src="image/about.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end of about us -->
+
+            <!-- blogs -->
+            <section id="offers" class="py-5">
+                <div class="container">
+                    <div
+                        class="row d-flex align-items-center justify-content-center text-center justify-content-lg-start text-lg-start">
+                        <div class="offers-content">
+                            <span class="text-white">Discount Up To 40%</span>
+                            <h2 class="mt-2 mb-4 text-white">Grand Sale Offer!</h2>
+                            <a href="#" class="btn">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end of blogs -->
+
+
+            <!-- newsletter -->
+            <section id="newsletter" class="py-5">
+                <div class="container">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <div class="title text-center pt-3 pb-5">
+                            <h2 class="position-relative d-inline-block ms-4">Newsletter Subscription</h2>
+                        </div>
+
+                        <p class="text-center text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Possimus rem
+                            officia accusantium maiores quisquam dolorum?</p>
+                        <div class="input-group mb-3 mt-3">
+                            <input type="text" class="form-control" placeholder="Enter Your Email ...">
+                            <button class="btn" type="submit">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end of newsletter -->
+
+            <!-- footer -->
+            <footer class="bg-dark py-5">
+                <div class="container">
+                    <div class="row text-white g-4">
+                        <div class="col-md-6 col-lg-3">
+                            <a class="text-uppercase text-decoration-none brand text-white" href="index.html">Attire</a>
+                            <p class="text-white text-muted mt-3">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit.
+                                Nostrum mollitia quisquam veniam odit cupiditate, ullam aut voluptas velit dolor ipsam?
+                            </p>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3"><template></template>
+                            <h5 class="fw-light">Links</h5>
+                            <ul class="list-unstyled">
+                                <li class="my-3">
+                                    <a href="#" class="text-white text-decoration-none text-muted">
+                                        <i class="fas fa-chevron-right me-1"></i> Home
+                                    </a>
+                                </li>
+                                <li class="my-3">
+                                    <a href="#" class="text-white text-decoration-none text-muted">
+                                        <i class="fas fa-chevron-right me-1"></i> Collection
+                                    </a>
+                                </li>
+                                <li class="my-3">
+                                    <a href="#" class="text-white text-decoration-none text-muted">
+                                        <i class="fas fa-chevron-right me-1"></i> Blogs
+                                    </a>
+                                </li>
+                                <li class="my-3">
+                                    <a href="#" class="text-white text-decoration-none text-muted">
+                                        <i class="fas fa-chevron-right me-1"></i> About Us
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <h5 class="fw-light mb-3">Contact Us</h5>
+                            <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                                <span class="me-3">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </span>
+                                <span class="fw-light">
+                                    Albert Street, New York, AS 756, United States of America
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                                <span class="me-3">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="fw-light">
+                                    attire.support@gmail.com
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                                <span class="me-3">
+                                    <i class="fas fa-phone-alt"></i>
+                                </span>
+                                <span class="fw-light">
+
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <h5 class="fw-light mb-3">Follow Us</h5>
+                            <div>
+                                <ul class="list-unstyled d-flex">
+                                    <li>
+                                        <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                            <i class="fab fa-pinterest"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end of footer -->
+
+
+
+            <!-- javscript link  -->
+            <script src="script.js"></script>
+        </div>
+    </div>
+
+</body>
+
+</html>

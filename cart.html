@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOPPING CART</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .cart-item img {
+            width: 200px;
+            height: 250px;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+        .cart-item div {
+            flex: 1;
+        }
+
+        .cart-item h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+        }
+
+        .cart-item button {
+            background-color: #e5345b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin: 5px 2px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .cart-item button:disabled {
+            background-color: #d3a7a1;
+            cursor: not-allowed;
+        }
+
+        #cart-summary {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #dc3545;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #dc3545;
+        }
+
+        #payment-form {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #payment-form h2 {
+            margin-top: 0;
+        }
+
+        #payment-form-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #payment-form-content label {
+            margin-top: 10px;
+        }
+
+        #payment-form-content input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #payment-form-content button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #payment-form-content button:hover {
+            background-color: #dc3545;
+        }
+
+        #close-payment-form {
+            display: block;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #close-payment-form:hover {
+            background-color: #c82333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        select,
+        input[type="number"] {
+            width: 20%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main id="cart">
+        <h2>MY SHOPPING CART</h2>
+        <div id="cart-items"></div>
+        <div id="cart-summary">
+            <p>Total Items: <span id="total-items">0</span></p>
+            <p>Total Price: $<span id="total-price">0.00</span></p>
+            <button><a style="text-decoration: none; color: WHITE;" href="index1.html">Continue Shopping</a></button>
+            <button id="clear-cart">Clear All</button>
+            <button id="make-payment">Make Payment</button>
+        </div>
+    </main>
+
+    <div id="payment-form" style="display:none;">
+        <h2>Payment Form</h2>
+        <form id="payment-form-content">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="card">Card Number:</label>
+            <input type="text" id="card" name="card" required>
+            <button type="submit">Submit Payment</button>
+        </form>
+        <button id="close-payment-form">Close</button>
+    </div>
+    
+    <!-- javascript  -->
+
+    <script>
+        function updateCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.classList.add('cart-item');
+                div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div>
+                <h2>${item.name}</h2>
+                <p>Price: $${item.price}</p>
+                <button  ${item.quantity <= 1 ? 'disabled' : ''} onclick="decrementQuantity(${index})">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="incrementQuantity(${index})">+</button>
+                <button onclick="removeItem(${index})">Remove</button>
+                
+
+            </div>
+        `;
+                cartItems.appendChild(div);
+
+                totalItems += item.quantity;
+                totalPrice += item.price * item.quantity;
+            });
+
+            document.getElementById('total-items').innerText = totalItems;
+            document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+        }
+
+        function incrementQuantity(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity++;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        function decrementQuantity(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart[index].quantity > 1) { // Ensure quantity does not go below 1
+                cart[index].quantity--;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCart();
+            }
+        }
+
+        function removeItem(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            updateCart();
+        }
+
+        function makePayment() {
+            document.getElementById('payment-form').style.display = 'block';
+        }
+
+        document.getElementById('clear-cart').addEventListener('click', clearCart);
+
+        document.getElementById('make-payment').addEventListener('click', makePayment);
+
+        document.getElementById('payment-form-content').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const card = document.getElementById('card').value;
+
+            if (!name || !email || !card) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            alert('Payment Success');
+            clearCart();
+            document.getElementById('payment-form').style.display = 'none';
+        });
+
+        document.getElementById('close-payment-form').addEventListener('click', function () {
+            document.getElementById('payment-form').style.display = 'none';
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.location.pathname.endsWith('cart.html')) {
+                updateCart();
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

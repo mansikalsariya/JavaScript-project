@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .product-container {
+            display: flex;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 400px;
+        }
+
+        .product-details {
+            margin-left: 20px;
+        }
+
+        .product-details h1 {
+            margin-top: 0;
+        }
+
+        .product-price {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #e5345b;
+            color: #fff !important;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button a {
+            color: #fff !important;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="product-detail" class="py-5">
+        <div class="container">
+            <div class="product-container">
+                <div class="product-image">
+                    <img id="product-image" src="" alt="Product Image">
+                </div>
+                <div class="product-details">
+                    <h1 id="product-name">Product Name</h1>
+                    <p id="product-description">Product Description</p>
+                    <p id="product-price">$00.00</p>
+
+                    <label for="size-select">Select Size:</label>
+                    <select id="size-select">
+                        <option value="s">Small</option>
+                        <option value="m">Medium</option>
+                        <option value="l">Large</option>
+                        <option value="xl">Extra Large</option>
+                    </select>
+
+                    <label for="quantity-select">Select Quantity:</label>
+                    <input type="number" id="quantity-select" min="1" value="1">
+
+                    <button id="add-to-cart"><a href="index1.html">BACK</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return { id: params.get('id') };
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = getQueryParams();
+            const productId = params.id;
+
+            const products = [
+
+                {
+                    id: 1,
+                    name: 'Trendsetter Threads',
+                    price: 80,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/special_product_1.jpg'
+                },
+
+                {
+                    id: 2,
+                    name: 'Radiant Rose',
+                    price: 90,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/special_product_2.jpg'
+                },
+
+                {
+                    id: 3,
+                    name: 'Sassy & Sophisticated',
+                    price: 80,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/special_product_3.jpg'
+                },
+
+                {
+                    id: 4,
+                    name: 'Divine Drape_kurti',
+                    price: 90,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/special_product_4.jpg'
+                },
+
+                {
+                    id: 5,
+                    name: 'Femme Flair',
+                    price: 80,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/plaza.webp'
+
+                },
+
+                {
+                    id: 6,
+                    name: 'Urban Elegance',
+                    price: 90,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/kurta.webp'
+                },
+
+
+                {
+                    id: 7,
+                    name: 'Chic Avenue',
+                    price: 80,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/bombay1.webp'
+                },
+                {
+                    id: 8,
+                    name: 'Formalwear',
+                    price: 90,
+                    category: 'best sellers',
+                    inStock: false,
+                    image: 'image/women.webp'
+                },
+                {
+                    id: 9,
+                    name: 'Black_shirt',
+                    price: 25,
+                    category: 'Featured',
+                    inStock: true,
+                    image: 'image/men1.webp'
+                },
+
+                {
+                    id: 10,
+                    name: 'Bold Attire',
+                    price: 60,
+                    category: 'Featured',
+                    inStock: true,
+                    image: 'image/men2.webp'
+                },
+
+                {
+                    id: 11,
+                    name: 'Maverick Styles',
+                    price: 25,
+                    category: 'Featured',
+                    inStock: true,
+                    image: 'image/men4.webp'
+                },
+
+                {
+                    id: 12,
+                    name: 'Prestige Formalwear',
+                    price: 40,
+                    category: 'Featured',
+                    inStock: true,
+                    image: 'image/men8.webp'
+                },
+
+                {
+                    id: 13,
+                    name: 'T-shirt_men',
+                    price: 60,
+                    category: 'New Arrival',
+                    inStock: true,
+                    image: 'image/men4.webp'
+
+                },
+                {
+                    id: 14,
+                    name: 'Executive Couture',
+                    price: 50,
+                    category: 'New Arrival',
+                    inStock: true,
+                    image: 'image/men5.webp'
+                },
+
+                {
+                    id: 15,
+                    name: 'Noble Threads',
+                    price: 60,
+                    category: 'New Arrival',
+                    inStock: true,
+                    image: 'image/men6.webp'
+                },
+
+                {
+                    id: 16,
+                    name: 'Premier Formals',
+                    price: 40,
+                    category: 'New Arrival',
+                    inStock: true,
+                    image: 'image/men7.webp'
+                },
+
+                {
+                    id: 17,
+                    name: 'Little Trendsetters',
+                    price: 90,
+                    category: 'New Arrival',
+                    inStock: false,
+                    image: 'image/kids1.webp'
+                },
+
+                {
+                    id: 18,
+                    name: 'Tiny Treasures',
+                    price: 90,
+                    category: 'New Arrival',
+                    inStock: false,
+                    image: 'image/kids2.webp'
+                },
+
+                {
+                    id: 19,
+                    name: 'Kiddos Couture',
+                    price: 90,
+                    category: 'Featured',
+                    inStock: false,
+                    image: 'image/kids3.webp'
+                },
+
+                {
+                    id: 20,
+                    name: 'Playful Threads',
+                    price: 70,
+                    category: 'Featured',
+                    inStock: false,
+                    image: 'image/kids4.webp'
+                },
+
+                {
+                    id: 21,
+                    name: 'Mini Marvels',
+                    price: 90,
+                    category: 'New Arrival',
+                    inStock: false,
+                    image: 'image/kid5.webp'
+                },
+
+                {
+                    id: 22,
+                    name: 'Kiddo Kingdom',
+                    price: 90,
+                    category: 'New Arrival',
+                    inStock: false,
+                    image: 'image/kids6.webp'
+                },
+
+                {
+                    id: 23,
+                    name: 'Joyful Jumpsuits',
+                    price: 90,
+                    category: 'Featured',
+                    inStock: false,
+                    image: 'image/kids7.webp'
+                },
+
+                {
+                    id: 24,
+                    name: 'T-shirt_men',
+                    price: 70,
+                    category: 'Charming Cubs',
+                    inStock: false,
+                    image: 'image/kind3.webp'
+                },
+
+            ];
+
+            const product = products.find(p => p.id == productId);
+
+            if (product) {
+                document.getElementById('product-name').textContent = product.name;
+                document.getElementById('product-description').textContent = `A detailed description of ${product.name}.`;
+                document.getElementById('product-price').textContent = `$${product.price}`;
+                document.getElementById('product-image').src = product.image;
+            } else {
+                document.getElementById('product-name').textContent = 'Product not found';
+                document.getElementById('product-description').textContent = '';
+                document.getElementById('product-price').textContent = '';
+                document.getElementById('product-image').src = 'path/to/placeholder/image.jpg';
+            }
+
+            document.getElementById('add-to-cart').addEventListener('click', function () {
+                const size = document.getElementById('size-select').value;
+                const quantity = document.getElementById('quantity-select').value;
+
+                console.log('Size:', size);
+                console.log('Quantity:', quantity);
+
+                alert(`Added ${quantity} item(s) of size ${size} to your cart.`);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
